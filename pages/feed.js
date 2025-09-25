@@ -1,21 +1,22 @@
+import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import dynamic from "next/dynamic";
 
 const MapLeaflet = dynamic(() => import("../components/MapLeaflet"), { ssr: false });
 
-const posts = [
-  { id: 1, title: "Primera publicación", body: "Texto de ejemplo uno.", author: "Ana Pérez" },
-  { id: 2, title: "Segunda publicación", body: "Texto de ejemplo dos.", author: "Juan López" },
-  { id: 3, title: "Tercera publicación", body: "Texto de ejemplo tres.", author: "María Díaz" },
-];
-
 export default function Feed() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/posts").then(r => r.json()).then(setPosts).catch(console.error);
+  }, []);
+
   return (
     <main className="min-h-screen bg-gray-50">
       <section className="max-w-3xl mx-auto p-6">
         <header className="mb-4">
           <h1 className="text-2xl font-semibold">Feed</h1>
-          <p className="text-gray-600">3 publicaciones de ejemplo</p>
+          <p className="text-gray-600">{posts.length} publicaciones de ejemplo</p>
         </header>
 
         <section className="grid gap-3 mb-8">
