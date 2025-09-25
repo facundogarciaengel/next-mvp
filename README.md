@@ -1,40 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
 
-## Getting Started
+# next-mvp
 
-First, run the development server:
+Proyecto Next.js mínimo (MVP) con Leaflet y TailwindCSS — plantilla pequeña para mostrar un feed y un mapa.
+
+Descripción
+-----------
+
+Este repositorio contiene una aplicación Next.js (React) de ejemplo que usa:
+
+- Next.js
+- React
+- Leaflet + react-leaflet (mapas)
+- TailwindCSS (configurado vía PostCSS)
+
+Objetivo: servir como punto de partida rápido para una interfaz con feed de posts y un mapa interactivo.
+
+Estado
+------
+
+El archivo `package.json` indica las versiones usadas en este proyecto:
+
+- `next` 15.5.4
+- `react` / `react-dom` 19.1.0
+- `leaflet` ^1.9.4
+- `react-leaflet` ^5.0.0
+- `tailwindcss` ^4 (devDependency)
+
+Instalación y ejecución (local)
+-------------------------------
+
+Requisitos recomendados:
+
+- Node.js 18 o superior (recomendado: 18.x/20.x)
+- npm (v9+ incluido con Node moderno) o pnpm/yarn si prefieres
+
+Pasos rápidos:
 
 ```bash
+# desde la raíz del proyecto
+cd /tu-proyecto
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Scripts disponibles
+-------------------
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- `npm run dev` — ejecuta Next.js en modo desarrollo (http://localhost:3000 por defecto)
+- `npm run build` — construye la app para producción
+- `npm run start` — inicia la app ya construida (usualmente tras `npm run build`)
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Estructura principal del proyecto
+--------------------------------
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+- `pages/` — rutas de Next.js (ej.: `index.js`, `feed.js`, `login.js`, `api/hello.js`)
+- `components/` — componentes reutilizables (ej.: `MapLeaflet.js`, `PostCard.js`)
+- `public/` — activos estáticos (imágenes, íconos)
+- `styles/` — estilos globales (ej.: `globals.css`)
+- `next.config.mjs`, `postcss.config.mjs`, `jsconfig.json` — configuración del proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Notas importantes / trucos
+--------------------------
 
-## Learn More
+- Leaflet requiere que cargues su CSS para que el mapa y los marcadores se vean correctamente. Si no ves los estilos del mapa, asegúrate de importar la hoja de estilos de Leaflet en `pages/_app.js` o en tu componente `MapLeaflet.js`:
 
-To learn more about Next.js, take a look at the following resources:
+```js
+import 'leaflet/dist/leaflet.css'
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+- Si usas Tailwind, confirma que tengas el archivo `tailwind.config.js` o la configuración correcta en `postcss.config.mjs`. En este repositorio hay dependencias de Tailwind en `devDependencies`; si no estás usando utilidades Tailwind todavía, puedes eliminar/añadir configuración según necesites.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next 15 y React 19 introducen cambios respecto a versiones anteriores. Si encuentras errores de compatibilidad, revisa las notas de migración de Next.js/React o fija una versión más conservadora temporalmente.
 
-## Deploy on Vercel
+Problemas comunes y soluciones rápidas
+------------------------------------
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Error: "window is not defined" al usar Leaflet en SSR — asegúrate de que el componente del mapa se monte solo en el cliente (por ejemplo, con check `typeof window !== 'undefined'` o usando dynamic import con `ssr: false`).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+- Si `npm run dev` se queda en otro puerto, verifica variables de entorno o si otro proceso ya usa el puerto 3000.
+
+Agregar variables de entorno
+---------------------------
+
+Si tu app necesitará claves o configuraciones, añade un archivo `.env.local` en la raíz y referencia con `process.env.MI_VARIABLE` en el código. No subas `.env.local` al repositorio.
+
+Siguientes pasos sugeridos
+-------------------------
+
+- Completar `tailwind.config.js` y utilizar utilidades de Tailwind en `styles/globals.css` si quieres diseño rápido.
+- Añadir tests básicos y un script `lint` si vas a escalar el proyecto.
+- Si quieres, puedo:
+	- Generar/rellenar `tailwind.config.js` y ejemplo de uso.
+	- Añadir la importación de `leaflet.css` en `_app.js` y asegurar que `MapLeaflet.js` solo se renderice en cliente.
+
+Contacto
+--------
+
+
