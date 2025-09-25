@@ -15,7 +15,7 @@ export default function Login() {
     <main className="min-h-screen grid place-items-center bg-gray-50">
       <section className="w-full max-w-sm bg-white p-6 rounded-xl shadow">
         <h1 className="text-2xl font-semibold mb-4">Ingreso</h1>
-
+        
         <form onSubmit={handleSubmit} className="grid gap-3">
           <div className="grid gap-1">
             <label htmlFor="user" className="text-sm font-medium">Usuario</label>
@@ -52,6 +52,6 @@ export default function Login() {
           </button>
         </form>
       </section>
-    </main>
+      </main>
   );
 }

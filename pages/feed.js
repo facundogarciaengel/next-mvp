@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import dynamic from "next/dynamic";
 
 const MapLeaflet = dynamic(() => import("../components/MapLeaflet"), { ssr: false });
 
 export default function Feed() {
-  const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    fetch("/api/posts").then(r => r.json()).then(setPosts).catch(console.error);
-  }, []);
+  const posts = [
+    { id: 1, title: "Optimizamos la siembra con visión artificial", body: "Hemos desplegado modelos de IA que analizan imágenes satelitales para optimizar fechas de siembra y reducir el uso de fertilizantes en un 18% en pruebas piloto.", author: 'AgroAI Labs'},
+    { id: 2, title: 'Predicción temprana de plagas mediante sensores', body: 'Integrando datos de sensores y modelos predictivos, detectamos episodios de plagas con hasta 7 días de anticipación, ayudando a planificar intervenciones más eficientes.', author: 'AgroAI Labs' },
+    { id: 3, title: 'Ahorro de agua con riego inteligente', body: 'Nuestra plataforma recomienda riegos por parcela según humedad y predicción climática, logrando reducciones de consumo hídrico y mayor uniformidad en rendimiento.', author: 'AgroAI Labs' }
+  ]
 
   return (
     <main className="min-h-screen bg-gray-50">

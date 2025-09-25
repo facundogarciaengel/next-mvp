@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 
 const position = [-37.0101, -62.3656]; // Guaminí
