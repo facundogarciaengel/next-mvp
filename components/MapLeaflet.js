@@ -8,7 +8,7 @@ const InnerMap = dynamic(async () => {
   const L = (await import("leaflet")).default;
   const { MapContainer, TileLayer, Marker, Popup } = await import("react-leaflet");
 
-  // Fix de íconos en Next (opcional pero recomendado)
+  // Fix de íconos en Next
   function fixLeafletIcon() {
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
